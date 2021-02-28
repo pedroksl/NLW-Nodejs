@@ -1,5 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
+/**
+ * Migration used to create the surveys table on the database
+ */
 export class CreateSurveys1614459363023 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {

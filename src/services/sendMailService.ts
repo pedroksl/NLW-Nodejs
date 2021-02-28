@@ -2,6 +2,15 @@ import nodemailer, { Transporter } from 'nodemailer'
 import handlebars from 'handlebars'
 import fs from 'fs'
 
+
+/**
+ * Interface used to receive email configuration
+ * Contains 'to': target email
+ * 'subject': title of the email
+ * 'variables': several info that goes on the email body
+ * including user name, id, survey id, etc
+ * 'path': the path of the handlebars template file
+ */
 interface SendMailProps {
     to: string;
     subject: string;
@@ -9,8 +18,20 @@ interface SendMailProps {
     path: string;
 }
 
+/**
+ * Service class responsible for the action of sending
+ * fake emails using nodemailer, according to the
+ * handlebars template
+ */
 class SendMailService {
+    /**
+     * Private variable used to store the transporter
+     * created inside the constructor
+     */
     private client: Transporter;
+
+    // During creation of the serivice, define a transporter
+    // that will be used to send fake emails later on
     constructor() {
         nodemailer.createTestAccount().then(account => {
             const transporter = nodemailer.createTransport({
@@ -27,6 +48,10 @@ class SendMailService {
         });
     };
 
+    /**
+     * Send an email with the requested parameters
+     * @param {SendMailProps} props to, subject, variables and path, in a SendMailProps interface
+     */
     async execute({ to, subject, variables, path }: SendMailProps) {
         const templateFileContent = fs.readFileSync(path).toString("utf8");
 
@@ -46,4 +71,6 @@ class SendMailService {
     }
 }
 
+// Exported an already created instance of the service
+// ready to be used
 export default new SendMailService;

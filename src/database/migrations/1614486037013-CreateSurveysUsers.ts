@@ -1,5 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
+/**
+ * Migration used to create the survey users table on the database
+ */
 export class CreateSurveysUsers1614486037013 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -31,8 +34,8 @@ export class CreateSurveysUsers1614486037013 implements MigrationInterface {
                         default: "now()"
                     }
                 ],
-                foreignKeys: [
-                    {
+                foreignKeys: [ // Two foreign keys are present in this table
+                    { // Foreign that relates to the users table, bringing user_id
                         name: "FKUser",
                         referencedTableName: "users",
                         referencedColumnNames: ["id"],
@@ -40,7 +43,7 @@ export class CreateSurveysUsers1614486037013 implements MigrationInterface {
                         onDelete: "CASCADE",
                         onUpdate: "CASCADE"
                     },
-                    {
+                    { // Foreign that relates to the suverys table, bringing survey_id
                         name: "FKSurvey",
                         referencedTableName: "surveys",
                         referencedColumnNames: ["id"],

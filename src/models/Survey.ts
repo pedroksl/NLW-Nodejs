@@ -1,6 +1,9 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from 'uuid'
 
+/**
+ * Survey Model for the database table
+ */
 @Entity("surveys")
 class Survey {
     @PrimaryColumn()

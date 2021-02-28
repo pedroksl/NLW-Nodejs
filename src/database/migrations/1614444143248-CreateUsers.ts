@@ -1,5 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
+/**
+ * Migration used to create the users table on the database
+ */
 export class CreateUsers1614444143248 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
